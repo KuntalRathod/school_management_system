@@ -2,7 +2,6 @@ import db from "../../config/db.js"
 
 class TeacherClassModel {
   static async getAllTeacherClasses() {
-
     //inner join to get teacher name, class name and subject name from teacher_classes table
     const query = `
       SELECT tc.id, u.name AS teacher_name, c.class_name, s.subject_name 
