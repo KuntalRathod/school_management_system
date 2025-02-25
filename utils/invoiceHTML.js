@@ -1,22 +1,6 @@
-import { generateInvoice } from "../../helpers/generateInvoice.js"
-import { sendMail } from "../../helpers/sendMail.js"
-
-export const sendInvoice = async (req, res) => {
-  try {
-    const { email } = req.body
-
-    if (!email) {
-      return res.status(400).json({ error: "Email is required" })
-    }
-
-    console.log("📝 Generating Invoice...")
-    const pdfPath = await generateInvoice()
-
-    console.log("📧 Sending Invoice to:", email)
-    await sendMail(
-      email,
-      "Your Invoice",
-      `<!DOCTYPE html>
+export const invoiceHTML = () => {
+  return `
+      <!DOCTYPE html>
       <html>
       <head>
         <meta charset="utf-8">
@@ -118,13 +102,5 @@ export const sendInvoice = async (req, res) => {
         </div>
       </body>
       </html>
-      `,
-      pdfPath
-    )
-    res.status(200).json({ message: "Invoice sent successfully!" })
-  } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Failed to send invoice", details: error.message })
-  }
+    `
 }

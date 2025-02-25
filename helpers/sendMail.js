@@ -1,8 +1,10 @@
 import nodemailer from "nodemailer"
+import fs from "fs/promises"
 import dotenv from "dotenv"
+
 dotenv.config()
 
-export const sendMail = async (email, mailSubject, content, pdfPath) => {
+export const sendMail = async (email, subject, html, pdfPath) => {
   try {
     const transport = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -14,24 +16,22 @@ export const sendMail = async (email, mailSubject, content, pdfPath) => {
       },
     })
 
+    const pdfAttachment = await fs.readFile(pdfPath)
+
     const mailOptions = {
       from: process.env.SMTP_MAIL,
       to: email,
-      subject: mailSubject,
-      html: content, // Send as HTML
-      attachments: [
-        {
-          filename: "invoice.pdf",
-          path: pdfPath,
-          contentType: "application/pdf",
-        },
-      ],
+      subject,
+      html,
+      attachments: [{ filename: "invoice.pdf", content: pdfAttachment }],
     }
 
     await transport.sendMail(mailOptions)
-    console.log("Email sent successfully!")
+    console.log("📩 Email sent successfully!")
+
+    return pdfPath
   } catch (error) {
-    console.error("Error sending mail:", error)
+    console.error("❌ Error sending mail:", error)
     throw error
   }
 }
