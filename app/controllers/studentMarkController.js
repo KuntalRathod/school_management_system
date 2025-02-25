@@ -64,6 +64,29 @@ class StudentMarkController {
     }
   }
 
+  // Get student marks by student id
+  static async getStudentMarks(req, res) {
+    try {
+      const { id } = req.params
+      console.log(id);
+      
+
+      // const userId = req.user.id
+
+      // if (Number(userId) !== Number(student_id)) {
+      //   return res.status(403).json({ error: "Unauthorized access" })
+      // }
+
+      const marks = await StudentMarkModel.getStudentsMarks(id)
+      console.log("marks" ,marks);
+      
+
+      res.status(200).json(marks)
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
+  }
+
   // Update student marks
   //   static async update(req, res) {
   //     try {

@@ -1,6 +1,11 @@
 import UserController from "../app/controllers/userController.js"
 import express from "express"
-import { isAdminOrTeacher, verifyJWT } from "../middlewares/authMiddleware.js"
+import {
+  isAdminOrStudentOrTeacher,
+  isAdminOrTeacher,
+  isStudent,
+  verifyJWT,
+} from "../middlewares/authMiddleware.js"
 
 const userRouter = express.Router()
 
@@ -13,7 +18,12 @@ userRouter.get(
 )
 
 // Route to get a user by ID
-userRouter.get("/:id", verifyJWT, isAdminOrTeacher, UserController.getUserById)
+userRouter.get(
+  "/:id",
+  verifyJWT,
+  isAdminOrStudentOrTeacher,
+  UserController.getUserById
+)
 
 // Route to update a user by ID
 userRouter.put(

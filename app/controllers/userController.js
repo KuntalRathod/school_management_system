@@ -30,6 +30,19 @@ class UserController {
       // Extract the user id from the request parameters
       const { id } = req.params
 
+      console.log("id", id)
+
+      const userId = req.user.id
+
+      console.log("userId", userId)
+
+      //user can only view their own profile
+      if (Number(userId) !== Number(id)) {
+        // console.log("userId", typeof userId)
+        // console.log("id", typeof id)
+
+        return res.status(403).json({ error: "Unauthorized access" })
+      }
       // Get the user from the database using the AuthModel
       const [rows] = await UserModel.getUserById(id)
 

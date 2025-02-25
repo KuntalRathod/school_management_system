@@ -57,6 +57,27 @@ class StudentMarkModel {
     return result.insertId
   }
 
+  //get student marks by student id
+  static async getStudentsMarks(student_id) {
+    const [rows] = await db.query(
+      `
+            SELECT sm.id,
+                   s.name AS student_name,
+                   t.name AS teacher_name,
+                   sub.subject_name,
+                   sm.marks_obtained,
+                   sm.total_marks
+            FROM student_marks sm
+            JOIN users s ON sm.student_id = s.id AND s.usertype = 'student'
+            JOIN users t ON sm.teacher_id = t.id AND t.usertype = 'teacher'
+            JOIN subjects sub ON sm.subject_id = sub.id 
+            WHERE sm.student_id = ?
+        `,
+      [student_id]
+    )
+    return rows
+  }
+
   // Update student marks
   //   static async update(id, marks_obtained, total_marks) {
   //     const [result] = await db.query(

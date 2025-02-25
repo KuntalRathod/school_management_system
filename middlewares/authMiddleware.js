@@ -57,3 +57,14 @@ export const isAdminOrTeacher = (req, res, next) => {
   }
   return res.status(403).json({ message: "Unauthorized access" })
 }
+
+export const isAdminOrStudentOrTeacher = (req, res, next) => {
+  if (
+    req.user.usertype === "teacher" ||
+    req.user.usertype === "admin" ||
+    req.user.usertype === "student"
+  ) {
+    return next()
+  }
+  return res.status(403).json({ message: "Unauthorized access" })
+}

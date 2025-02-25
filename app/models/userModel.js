@@ -32,7 +32,7 @@ class UserModel {
 
   // Static method to find a user by id
   static async getUserById(id) {
-    const query = `SELECT * FROM users WHERE id = ?`
+    const query = `SELECT id,name,username,email,age,usertype,profileImage FROM users WHERE id = ?`
     try {
       const dbQuery = await db.execute(query, [id])
       return dbQuery
