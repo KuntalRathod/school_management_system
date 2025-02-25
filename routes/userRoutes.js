@@ -7,8 +7,8 @@ const userRouter = express.Router()
 // Route to get all users with optional pagination
 userRouter.get(
   "/getall",
-  // verifyJWT,
-  // isAdminOrTeacher,
+  verifyJWT,
+  isAdminOrTeacher,
   UserController.getAllUsers
 )
 
