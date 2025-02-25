@@ -68,8 +68,7 @@ class StudentMarkController {
   static async getStudentMarks(req, res) {
     try {
       const { id } = req.params
-      console.log(id);
-      
+      console.log(id)
 
       // const userId = req.user.id
 
@@ -78,8 +77,7 @@ class StudentMarkController {
       // }
 
       const marks = await StudentMarkModel.getStudentsMarks(id)
-      console.log("marks" ,marks);
-      
+      console.log("marks", marks)
 
       res.status(200).json(marks)
     } catch (error) {

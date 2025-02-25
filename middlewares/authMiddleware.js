@@ -52,10 +52,12 @@ export const isStudent = (req, res, next) => {
 }
 
 export const isAdminOrTeacher = (req, res, next) => {
+  console.log(req.user)
+
   if (req.user.usertype === "teacher" || req.user.usertype === "admin") {
     return next()
   }
-  return res.status(403).json({ message: "Unauthorized access" })
+  return res.status(403).json({ message: "AAAAUnauthorized access" })
 }
 
 export const isAdminOrStudentOrTeacher = (req, res, next) => {

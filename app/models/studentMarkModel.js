@@ -101,3 +101,4 @@ class StudentMarkModel {
 }
 
 export default StudentMarkModel
+
