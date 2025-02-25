@@ -30,19 +30,26 @@ export const verifyJWT = (req, res, next) => {
   }
 }
 
-// export const isAdmin = (req, res, next) => {
-//   if (req.user.usertype !== "admin") {
-//     return res.status(403).json({ error: "Unauthorized access !" })
-//   }
-//   next()
-// }
+export const isAdmin = (req, res, next) => {
+  if (req.user.usertype === "admin") {
+    return next()
+  }
+  return res.status(403).json({ message: "Unauthorized access" })
+}
 
-// export const isTeacher = (req, res, next) => {
-//   if (req.user.usertype !== "teacher") {
-//     return res.status(403).json({ error: "Unauthorized access !" })
-//   }
-//   next()
-// }
+export const isTeacher = (req, res, next) => {
+  if (req.user.usertype === "teacher") {
+    return next()
+  }
+  return res.status(403).json({ message: "Unauthorized access" })
+}
+
+export const isStudent = (req, res, next) => {
+  if (req.user.usertype === "student") {
+    return next()
+  }
+  return res.status(403).json({ message: "Unauthorized access" })
+}
 
 export const isAdminOrTeacher = (req, res, next) => {
   if (req.user.usertype === "teacher" || req.user.usertype === "admin") {
