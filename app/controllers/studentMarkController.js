@@ -11,22 +11,6 @@ class StudentMarkController {
     }
   }
 
-  // Get student mark by ID
-  //   static async getById(req, res) {
-  //     try {
-  //       const { id } = req.params
-  //       const mark = await StudentMarkModel.getById(id)
-
-  //       if (!mark) {
-  //         return res.status(404).json({ message: "Record not found" })
-  //       }
-
-  //       res.json(mark)
-  //     } catch (error) {
-  //       res.status(500).json({ error: error.message })
-  //     }
-  //   }
-
   // Add new student mark
   static async addStudent(req, res) {
     try {
@@ -85,48 +69,6 @@ class StudentMarkController {
     }
   }
 
-  // Update student marks
-  //   static async update(req, res) {
-  //     try {
-  //       const { id } = req.params
-  //       const { marks_obtained, total_marks } = req.body
-
-  //       if (marks_obtained == null || total_marks == null) {
-  //         return res.status(400).json({ message: "All fields are required" })
-  //       }
-
-  //       const affectedRows = await StudentMarkModel.update(
-  //         id,
-  //         marks_obtained,
-  //         total_marks
-  //       )
-
-  //       if (affectedRows === 0) {
-  //         return res.status(404).json({ message: "Record not found" })
-  //       }
-
-  //       res.json({ message: "Marks updated successfully" })
-  //     } catch (error) {
-  //       res.status(500).json({ error: error.message })
-  //     }
-  //   }
-
-  // Delete student marks
-  //   static async delete(req, res) {
-  //     try {
-  //       const { id } = req.params
-
-  //       const affectedRows = await StudentMarkModel.delete(id)
-
-  //       if (affectedRows === 0) {
-  //         return res.status(404).json({ message: "Record not found" })
-  //       }
-
-  //       res.json({ message: "Marks deleted successfully" })
-  //     } catch (error) {
-  //       res.status(500).json({ error: error.message })
-  //     }
-  //   }
 }
 
 export default StudentMarkController
