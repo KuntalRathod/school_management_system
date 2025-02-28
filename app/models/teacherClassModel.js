@@ -4,13 +4,31 @@ class TeacherClassModel {
   static async getAllTeacherClasses() {
     //inner join to get teacher name, class name and subject name from teacher_classes table
     const query = `
-      SELECT tc.id, u.name AS teacher_name, c.class_name, s.subject_name 
-      FROM teacher_classes tc
-      JOIN users u ON tc.teacher_id = u.id
-      JOIN classes c ON tc.class_id = c.id
-      JOIN subjects s ON tc.subject_id = s.id
-      WHERE u.usertype='teacher';
+                   SELECT 
+                        teacher_classes.id, 
+                        users.name AS teacher_name, 
+                        classes.class_name, 
+                        subjects.subject_name 
+                   FROM 
+                      teacher_classes 
+                   JOIN 
+                      users 
+                      ON teacher_classes.teacher_id = users.id
+                   JOIN 
+                      classes 
+                      ON teacher_classes.class_id = classes.id
+                   JOIN 
+                      subjects 
+                      ON teacher_classes.subject_id = subjects.id
+                   WHERE 
+                      users.usertype = 'teacher';
     `
+    //syntax for inner join
+    //SELECT column_name(s)
+    //FROM table1
+    //INNER JOIN table2
+    //ON table1.column_name = table2.column_name;
+    
     try {
       const [rows] = await db.execute(query)
       return rows

@@ -4,16 +4,23 @@ class StudentMarkModel {
   // Get all student marks
   static async getAll() {
     const [rows] = await db.query(`
-            SELECT sm.id, 
-                   s.name AS student_name, 
-                   t.name AS teacher_name, 
-                   sub.subject_name, 
-                   sm.marks_obtained, 
-                   sm.total_marks
-            FROM student_marks sm
-            JOIN users s ON sm.student_id = s.id AND s.usertype = 'student'
-            JOIN users t ON sm.teacher_id = t.id AND t.usertype = 'teacher'
-            JOIN subjects sub ON sm.subject_id = sub.id
+            SELECT 
+                  student_marks.id, 
+                  student.name AS student_name, 
+                  teacher.name AS teacher_name, 
+                  subjects.subject_name, 
+                  student_marks.marks_obtained, 
+                  student_marks.total_marks
+            FROM student_marks
+            JOIN users AS student 
+                  ON student_marks.student_id = student.id 
+            JOIN users AS teacher 
+                  ON student_marks.teacher_id = teacher.id 
+            JOIN subjects 
+                  ON student_marks.subject_id = subjects.id
+            WHERE student.usertype = 'student' 
+            AND teacher.usertype = 'teacher';
+
         `)
     return rows
   }
@@ -101,4 +108,3 @@ class StudentMarkModel {
 }
 
 export default StudentMarkModel
-
