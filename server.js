@@ -5,7 +5,6 @@ import { limiter } from "./utils/limiter.js"
 
 const app = express()
 
-
 app.use(limiter)
 
 

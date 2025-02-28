@@ -43,7 +43,7 @@ class UserController {
 
         return res.status(403).json({ error: "Unauthorized access" })
       }
-      // Get the user from the database using the AuthModel
+      // Get the user from the database using the UserModel
       const [rows] = await UserModel.getUserById(id)
 
       // Check if the user exists
@@ -75,7 +75,7 @@ class UserController {
     try {
       // Extract the user id from the request parameters
       const { id } = req.params
-      // Delete the user from the database using the AuthModel
+    
       const result = await UserModel.deleteUserById(id)
       res.status(200).json({ message: "User deleted successfully" })
     } catch (error) {

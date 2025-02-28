@@ -7,10 +7,11 @@ class UserModel {
     limit = parseInt(limit, 10) || 10
     offset = parseInt(offset, 10) || 0
 
-    const query = `SELECT id,name, username, email, usertype FROM users LIMIT ${limit} OFFSET ${offset}`
+    const query = `SELECT id,name, username, email, usertype FROM users LIMIT ? OFFSET ?`
 
     try {
-      const [dbQuery] = await db.execute(query)
+      const [dbQuery] = await db.execute(query, [limit, offset])
+      console.log(dbQuery)
       return dbQuery
     } catch (error) {
       console.error("Error getting users:", error)

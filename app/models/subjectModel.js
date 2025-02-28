@@ -16,6 +16,8 @@ class SubjectModel {
     const query = "INSERT INTO subjects (subject_name) VALUES (?)"
     try {
       const [result] = await db.execute(query, [subject_name])
+      console.log(result);
+      
       return result
     } catch (error) {
       console.error("Error creating subject:", error)
