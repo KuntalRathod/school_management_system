@@ -12,6 +12,14 @@ class ExcelModel {
       throw new Error(error.message)
     }
   }
+  static async getAllData() {
+    try {
+      const [rows] = await db.execute("SELECT * FROM excel_data")
+      return rows
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
 }
 
 export default ExcelModel
