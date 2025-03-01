@@ -3,22 +3,34 @@ import path from "path"
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads") // make sure this folder exists
+    cb(null, "uploads") // Ensure this folder exists
   },
   filename: function (req, file, cb) {
-    // Get file extension
     const ext = path.extname(file.originalname)
-    // Generate filename without original file name
-    cb(null, Date.now() + ext)
+    cb(null, Date.now() + ext) // Generate a unique filename
   },
 })
 
 const fileFilter = (req, file, cb) => {
-  // Accept any file with a mimetype that starts with "image/"
-  if (file.mimetype.startsWith("image/")) {
+  const allowedMimeTypes = [
+    "image/png",
+    "image/jpg",
+    "image/jpeg",
+    "image/gif",
+    "image/webp",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xlsx
+    "application/vnd.ms-excel", // .xls
+  ]
+
+  if (allowedMimeTypes.includes(file.mimetype)) {
     cb(null, true)
   } else {
-    cb(new Error("Only image files are allowed!"), false)
+    cb(
+      new Error(
+        "Only image files (.png, .jpg, .jpeg, .gif, .webp) and Excel files (.xlsx, .xls) are allowed!"
+      ),
+      false
+    )
   }
 }
 

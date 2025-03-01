@@ -2,6 +2,7 @@ import { sendInvoice } from "../app/controllers/invoiceController.js"
 import authRouter from "./authRoutes.js"
 import cityRouter from "./cityRoutes.js"
 import classRouter from "./classRoutes.js"
+import excelRouter from "./excelRoutes.js"
 import otpRouter from "./otpRoutes.js"
 import studentClassRouter from "./studentClassRoutes.js"
 import studentMarkRouter from "./studentMarkRoutes.js"
@@ -20,5 +21,6 @@ const initializeRouter = (app) => {
   app.use("/marks", studentMarkRouter)
   app.use("/invoice", sendInvoice)
   app.use("/city", cityRouter)
+  app.use("/excel", excelRouter)
 }
 export default initializeRouter
