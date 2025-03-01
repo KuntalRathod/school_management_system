@@ -5,7 +5,6 @@ import ExcelController from "../app/controllers/excelController.js"
 const excelRouter = express.Router()
 
 excelRouter.post("/upload", upload.single("file"), ExcelController.uploadFile)
-// Route to export data as an Excel file
-excelRouter.get("/export", ExcelController.exportToExcel)
+excelRouter.get("/export", ExcelController.exportToExcel) // Route to export data as an Excel file
 
 export default excelRouter
